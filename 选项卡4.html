@@ -1,0 +1,54 @@
+<html>
+  <head>
+  <script type="text/javascript">
+  /* 需求：
+      点击按钮显示对应的div  让其他的按钮背景色去掉，让其他的div都隐藏
+
+    分析：
+    获取所有的按钮和div
+    给按钮添加onclick事件
+    点击按钮的时候 ：
+    点击的按钮变成黄色  对应的div display:block;
+    之前的按钮无色 div display:none;
+  */
+
+  window.onload = function(){
+     var inputs =  document.querySelectorAll('input');
+     var divs =  document.querySelectorAll('div');
+     var last = inputs[0]; //定义last并给它一个初始值
+     for( var i=0; i<inputs.length; i++){
+        inputs[i].index = i;
+        inputs[i].onclick = function(){
+          last.style.background = '';
+          divs[last.index].style.display = 'none';
+          this.style.background ='yellow';
+          // this对应的div出现
+          //inputs的序列号和divs的是相对应的。此为二者可以唯一关联上的东西
+          //找到this对应的序列号 点击的this对应的input[i]是确定的 此处为 0，1，2
+          divs[this.index].style.display='block';
+          last = this;
+        }
+     }
+
+  }
+
+  </script>
+  <style type="text/css">
+    div{
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      display: none;
+      margin-top: 30px;
+    }
+  </style>
+  </head>
+  <body>
+    <input type="button" id="" value="选项一" style="background:yellow;"/> 
+    <input type="button" id="" value="选项二"/> 
+    <input type="button" id="" value="选项三"/> 
+    <div style="display:block;">内容一</div>
+    <div>内容二</div>
+    <div>内容三</div>
+  </body>
+</html>

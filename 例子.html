@@ -1,0 +1,119 @@
+<!-- 
+    getElementsByTagName(标签名)
+    通过标签名称去获取一组元素，它获取到的是一组元素
+    主语（限制范围）：
+    document  从整个文档中去获取一组元素
+    父级       从父级下面去获取一级元素
+
+    获取到的是一个集合，类数组
+    类数组： 类似数组，但是数组中的一些方法，它没有
+    它只具备数组中的length属性，以及每个数据都会有一个自己对应的下标
+
+    怎么取其中一个元素
+
+-->
+
+<!-- 
+    getElementsByClassName(class名称)
+    通过class去获取到一组元素
+    
+    主语（限制范围）：
+    document  从整个文档中去获取class元素
+    父级       从父级下面去获取class元素
+
+-->
+
+<!-- 
+    querySelector(css选择器)
+    通过css选择器去获取一个元素
+    它获取到的只有一个元素，如果说有重复的，那它只取第一个
+
+    主语（限制范围）：
+    document  从整个文档中去获取元素
+    父级       从父级下面去获取元素
+
+-->
+
+<!-- 
+    querySelectorAll(css选择器)
+    通过css选择器获取到一组元素   要操作某一个必须用到下标
+
+    主语
+    document  　从整个页面中去获取一组元素
+    父级        从父级下去获取一组元素
+
+-->
+
+
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style type="text/css">
+
+      #ul2>li:first-child{  
+        background-color: red;
+      }
+      #ul2>li:nth-child(4){   /* ul2 里的第4个li 变为黄色 */
+        background-color: yellow;
+      }
+    </style>
+    <script type="text/javascript">
+      window.onload = function(){
+        var lis = document.getElementsByTagName('li');
+        console.dir(lis); //打印出的是一个集合。
+        lis[2].style.backgroundColor = 'red';
+        var ul2 = document.getElementById('ul2');
+        var lis2 = ul2.getElementsByTagName('li');
+        lis2[2].style.backgroundColor = 'blue';
+
+        var blue = document.querySelector('#ul2 li:nth-child(6)');
+        blue.style.background = 'blue';
+
+        var ul1 = document.querySelector('.ul1');
+        ul1.style.backgroundColor = 'green';
+
+        var liss = document.querySelectorAll('li');
+        console.dir(liss); 
+        var list1 = ul2.querySelectorAll('li');
+        console.dir(list1); 
+        var list2 = document.querySelectorAll('#ul2 li');
+        console.dir(list2); 
+        var list3 = document.querySelectorAll('#ul2 ul li');
+        console.dir(list3);
+        list3[list3.Length-1]backgroundColor='black';
+        var list4 = document.querySelectorAll('green');
+        console.dir(list4);
+
+      }
+    </script>
+  </head>
+  <body>
+    <ul class="ul1">
+      <li>10</li>
+      <li class="three">3</li>
+      <li>7</li>    
+      <li>12</li>
+      <li>11</li>
+      <li>3</li>
+    </ul>
+    <ul id="ul2">
+      <li>red</li>
+      <li>3</li>
+      <li>7</li>    
+      <li>yellow</li>
+      <li>
+          <ul class="ul1">
+            <li>10</li>
+            <li>3</li>
+            <li>7</li>    
+            <li>12</li>
+            <li class="green">11</li>
+            <li>black</li>
+          </ul>
+      </li>
+      <li>blue</li>
+    </ul>
+  </body>
+</html>
