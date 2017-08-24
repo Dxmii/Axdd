@@ -1,0 +1,42 @@
+
+
+<!-- 做一个留言板 -->
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+
+    <script type="text/javascript">
+      // 先要有一个输入框，一个按钮，一个文本框
+      // 在文本框里输入内容，点击提交按钮，文本框里显示输入框输入的内容
+
+      window.onload = function () {
+         var text = document.getElementById('text');
+         var btn = document.getElementById('btn');
+         var btn2 = document.getElementById('btn2');
+         var content = document.getElementById('content');
+         btn.onclick = function(){
+            content.innerHTML = '<p>'+ text.value + '</P>' + content.innerHTML ; 
+         }
+         btn2.onclick = function(){
+            content.innerHTML = null; 
+         }
+
+      }
+    </script>
+    <style type="text/css">
+      #content{
+        width: 300px;
+        height: 300px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" id="text" value=""/>
+    <input type="button" id="btn" value="提交"/>
+    <input type="button" id="btn2" value="清空"/>
+    <div id="content"></div>
+  </body>
+</html>

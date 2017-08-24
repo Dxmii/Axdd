@@ -1,0 +1,61 @@
+
+
+<!-- 图片切换 -->
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+
+    <script type="text/javascript">
+      /* 
+        需求：
+        点击上一张 切换到上一张
+        点击下一张 切换到下一张
+        分析：
+        获取 按钮 和 图片
+        按钮添加点击事件
+           图片的改变实际上是src里边地址序号的改变
+
+
+      */
+
+      window.onload = function() {
+        var pre = document.getElementById('pre');
+        var next = document.getElementById('next');
+        var img = document.getElementById('img');
+        var position = ['images/1.JPG','images/2.JPG','images/3.JPG','images/4.JPG','images/5.JPG','images/6.JPG','images/7.JPG','images/8.JPG','images/9.JPG'];
+        var n = 0 ;  //此处n没有赋初始值的话 就报错 net::ERR_FILE_NOT_FOUND
+
+        next.onclick = function() {
+           n++;
+           if (n > position.length-1){
+             n = position.length-1
+           };
+           img.src = position[n];
+        }
+        pre.onclick = function() {
+           n--;
+           if (n<0){
+             n = 0
+           };
+           img.src = position[n];
+        };
+        
+      }
+
+    </script>
+
+    <style type="text/css">
+
+      #img{
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="button" id="pre" value="上一张"/>
+    <input type="button" id="next" value="下一张"/>
+    <img src="images/1.JPG" id="img">
+  </body>
+</html>

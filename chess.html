@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			window.onload = function(){
+
+				var x1 = document.getElementById('1') 
+					x1.classList.add('block')
+					x1.onclick = check
+				var x2 = document.getElementById('2') 
+					x2.classList.add('block')
+					x2.onclick = check
+			}
+			check = function (e) {
+				target = e.target || e.srcElement;
+				console.log(target.id); 
+				if (target.checked) {
+					target.classList.remove('red');
+					target.checked = false;
+				} else{
+					target.classList.add('red');
+					target.checked = true;
+				};
+			}
+		</script>
+		<style type="text/css">
+			.block{
+				position: relative;
+				width: 60px;
+				height: 60px;
+				border: 3px solid blue;
+			}
+			.red{
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "1"></div>
+		<div id = "2"></div>
+	</body>
+</html>
