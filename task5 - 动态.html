@@ -1,0 +1,175 @@
+
+<!-- 
+    如图，模拟一个队列，队列的每个元素是一个数字，初始队列为空
+    有一个input输入框，以及4个操作按钮
+
+    点击"左侧入"，将input中输入的数字从左侧插入队列中；
+    点击"右侧入"，将input中输入的数字从右侧插入队列中；
+    点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值；
+    点击"右侧出"，读取并删除队列右侧第一个元素，并弹窗显示元素中数值；
+    点击队列中任何一个元素，则该元素会被从队列中删除
+-->
+
+<!-- 
+    基于上一任务
+    限制输入的数字在10-100
+    队列元素数量最多限制为60个，当超过60个时，添加元素时alert出提示
+    队列展现方式变化如图，直接用高度表示数字大小
+    实现一个简单的排序功能，如冒泡排序（不限制具体算法），用可视化的方法表达出来，参考见下方参考资料
+-->
+
+
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style type="text/css">
+      #btBox{
+        position: relative;
+        display: block;
+        padding-left: 40px;
+        padding-top: 40px;
+      }
+
+      #ul{
+        height: 160px;
+      }
+    
+      .block{
+        position: relative;
+        float: left;
+        background-color: red;
+        width: 50px;
+        text-align:center;
+        color:#fff;
+        margin-right: 20px;
+        margin-top: 20px;
+        list-style-type:none;
+      }
+    </style>
+    <script type="text/javascript">
+    /*
+      点击"左侧入"，将input中输入的数字从左侧插入队列中；
+      分析：
+      找到左侧入按钮，input，以及输入的内容value
+      点击左侧入按钮
+      在ul里边从左边新增一个元素 <li>value</li>
+    */
+
+      valid = function(){
+        var text = document.getElementById('text'); 
+        if (!(text.value>=10&&text.value<=100)) {
+          alert('请输入10～100之间的值');
+          return false;
+        };
+        return true;
+      }
+    
+      leftIn = function(){
+        if (!valid()) {
+          return;
+        }
+          var ul = document.getElementById('ul');
+          var leftIn = document.getElementById('leftIn');
+          var text = document.getElementById('text'); 
+          var a =  createItem();         
+           ul.insertBefore(a,ul.childNodes[0]);         
+      };
+
+      rightIn = function(){
+        var ul = document.getElementById('ul');
+        var rightIn = document.getElementById('leftIn');
+        var text = document.getElementById('text'); 
+            //函数体的结构   参数，实现结构，返回值  
+        var a =  createItem();  
+         ul.appendChild(a);
+      };
+
+      createItem = function(){
+        var newItem = document.createElement("li");
+         newItem.classList.add ('block');
+         newItem.innerHTML = text.value;
+         newItem.style.height = parseInt(text.value) + 50 + 'px' ; 
+         newItem.style.top = 160 - parseInt(text.value) + 'px';
+         newItem.onclick = remove;
+         return newItem;        
+      }
+
+      leftOut = function(){
+        var leftIn = document.getElementById('leftIn');
+        var text = document.getElementById('text');
+        var ul = document.getElementById('ul');
+        ul.removeChild(ul.childNodes[0]);
+
+      };
+
+      rightOut = function(){
+        var leftIn = document.getElementById('leftIn');
+        var text = document.getElementById('text');
+        var ul = document.getElementById('ul');
+        ul.removeChild(ul.childNodes[ul.children.length-1]);
+      };
+
+      remove = function(e){
+        console.log(123);
+        var ul = document.getElementById('ul');
+        target = e.target || e.srcElement;
+        ul.removeChild(target);
+      };
+
+      getData = function(){
+        var ul = document.getElementById('ul');
+        var a=[];
+        for (var i = 0; i < ul.children.length; i++) {
+          a.push(ul.childNodes[i].innerText);
+        };
+        return a;
+      }
+
+      sortData = function(){        
+        var a = getData();
+        for (var i = 0; i < a.length; i++) {
+          for (var j = 0; j < a.length-i; j++) {
+            if (a[j]>a[j+1]) {
+              var temp = a[j+1];
+               a[j+1] = a[j];
+               a[j] = temp;
+
+               const _i = i;
+          setTimeout(function(){
+            var ul = document.getElementById('ul');
+            console.log(_i,ul.children[_i]);
+            ul.children[_i].innerText = a[_i];
+            ul.children[_i].style.height = 50 + parseInt(a[_i]) + 'px';
+            ul.children[_i].style.top = 160 - parseInt(a[_i]) + 'px';
+          },300*i)
+          
+            };
+          };
+          
+        
+  /*
+          var ul = document.getElementById('ul');
+            ul.children[i].innerText = a[i];
+            ul.children[i].style.height = 50 + parseInt(a[i]) + 'px';
+            ul.children[i].style.top = 160 - parseInt(a[i]) + 'px';    */
+        };        
+      }
+
+
+    
+    </script>
+  </head>
+  <body>
+    <div id="btBox">
+      <input type="text" id="text" value="" />
+      <input type="button" id="leftIn" value="左侧入"  onclick="leftIn()"/>
+      <input type="button" id="rightIn" value="右侧入" onclick="rightIn()"/>
+      <input type="button" id="leftOut" value="左侧出" onclick="leftOut()"/>
+      <input type="button" id="rightOut" value="右侧出" onclick="rightOut()"/>
+      <input type="button" id="sort" value="排序" onclick="sortData()"/>
+    </div>
+    <ul id="ul"></ul>
+  </body>
+</html>

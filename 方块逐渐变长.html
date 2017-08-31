@@ -1,0 +1,54 @@
+<!-- 
+    方块逐渐变长
+-->
+
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style type="text/css">
+      #block{
+        width: 200px;
+        height: 60px;
+        background-color: red;
+      }
+    </style>
+    <script type="text/javascript">
+    window.onload=function(){
+       var block = document.getElementById('block');
+       var resize = function(width){
+        block.style.width = width + 'px';   
+      };
+       
+       width = 200;
+
+       a = function(){
+
+        resize(width+=10);
+        if (width>=619) {
+          return;
+        };
+        setTimeout(a,50);
+
+       };
+
+        b = function(){
+
+        resize(width-=1);
+        if (width<=0) {
+          return;
+        };
+        setTimeout(b,50);
+
+       };
+       
+      } 
+    </script>
+  </head>
+  <body>
+    <div id="block">2223</div>
+    <button onclick="a()">伸长</button>
+    <button onclick="b()">缩短</button>
+  </body>
+</html>

@@ -38,6 +38,7 @@
         //给每个按钮添加点击事件
         for( var i=0; i<inputs.length;i++){
           inputs[i].index = i; //给每个按钮添加一个自定义属性，存的是它们对应的索引值
+          //将自定义对象传上去
           inputs[i].onclick = function(){  //此处的i对应的是点击的那个对象的i
             last.style.background = '';
             divs[last.index].style.display = 'none'
@@ -46,7 +47,7 @@
             //点击对象的索引值 this.index
             divs[this.index].style.display = 'block';
             //当前对象相对于下一次点击来说，它就是上一次点击的额对象
-            //谁的背景色为黄，那谁就是上一次点击对象（一定要放在所有代码之后）
+            //谁的背景色为黄，那谁就是上一次点击对象（一定要放在）
             last = this; //把上一次点击的对象更新成当前点击的对象
           }
         }
