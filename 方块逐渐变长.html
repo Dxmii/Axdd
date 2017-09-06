@@ -16,33 +16,27 @@
     </style>
     <script type="text/javascript">
     window.onload=function(){
-       var block = document.getElementById('block');
-       var resize = function(width){
-        block.style.width = width + 'px';   
-      };
-       
+      var block = document.getElementById('block');
+      var resize = function(width){
+      block.style.width = width + 'px';   
+      };       
        width = 200;
-
        a = function(){
-
-        resize(width+=10);
-        if (width>=619) {
-          return;
-        };
-        setTimeout(a,50);
-
+          resize(width+=10);
+          if (width>=619) {
+            return;
+          };
+          setTimeout(a,50);
        };
 
         b = function(){
+          resize(width-=1);
+          if (width<=0) {
+            return;
+          };
+          setTimeout(b,50);
+       };  
 
-        resize(width-=1);
-        if (width<=0) {
-          return;
-        };
-        setTimeout(b,50);
-
-       };
-       
       } 
     </script>
   </head>

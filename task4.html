@@ -1,0 +1,104 @@
+<!-- 
+    如图，模拟一个队列，队列的每个元素是一个数字，初始队列为空
+    有一个input输入框，以及4个操作按钮
+
+    点击"左侧入"，将input中输入的数字从左侧插入队列中；
+    点击"右侧入"，将input中输入的数字从右侧插入队列中；
+    点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值；
+    点击"右侧出"，读取并删除队列右侧第一个元素，并弹窗显示元素中数值；
+    点击队列中任何一个元素，则该元素会被从队列中删除
+-->
+
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+    <style type="text/css">
+      #btBox{
+        display: block;
+        padding-left: 40px;
+        padding-top: 40px;
+      }
+    
+      .block{
+        float: left;
+        background-color: red;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        text-align:center;
+        color:#fff;
+        margin-right: 20px;
+        margin-top: 20px;
+        list-style-type:none;
+      }
+    </style>
+    <script type="text/javascript">
+    /*
+      点击"左侧入"，将input中输入的数字从左侧插入队列中；
+      分析：
+      找到左侧入按钮，input，以及输入的内容value
+      点击左侧入按钮
+      在ul里边从左边新增一个元素 <li>value</li>
+    */
+    
+      leftIn = function(){
+        var leftIn = document.getElementById('leftIn');
+        var ul = document.getElementById('ul');
+        var newItem = createItem();
+        ul.insertBefore(newItem,ul.childNodes[0]);
+      };
+
+      rightIn = function(){
+        var rightIn = document.getElementById('rightIn');
+        var ul = document.getElementById('ul');
+        var newItem = createItem();
+         ul.appendChild(newItem);
+      };
+
+      createItem = function(){
+        var text = document.getElementById('text');
+        var ul = document.getElementById('ul');
+        var newItem = document.createElement("li");
+         newItem.classList = 'block';
+         newItem.innerHTML = text.value;
+         newItem.onclick = remove ;    
+         return newItem;   
+      }
+
+      leftOut = function(){
+        var leftOut = document.getElementById('leftOut');
+        var text = document.getElementById('text');
+        var ul = document.getElementById('ul');
+        ul.removeChild(ul.childNodes[0]);
+
+      };
+
+      rightOut = function(){
+        var rightOut = document.getElementById('rightOut');
+        var ul = document.getElementById('ul');
+        ul.removeChild(ul.childNodes[ul.children.length-1]);
+      };
+
+      remove = function(e){
+        var leftIn = document.getElementById('leftIn');
+        var ul = document.getElementById('ul');
+        target = e.target || e.srcElement;
+        ul.removeChild(target);
+      };
+
+    
+    </script>
+  </head>
+  <body>
+    <div id="btBox">
+      <input type="text" id="text" value=""/>
+      <input type="button" id="leftIn" value="左侧入"  onclick="leftIn()"/>
+      <input type="button" id="rightIn" value="右侧入" onclick="rightIn()"/>
+      <input type="button" id="leftOut" value="左侧出" onclick="leftOut()"/>
+      <input type="button" id="rightOut" value="右侧出" onclick="rightOut()"/>
+    </div>
+    <ul id="ul"></ul>
+  </body>
+</html>
